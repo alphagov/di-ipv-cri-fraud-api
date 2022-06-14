@@ -3,14 +3,12 @@ package uk.gov.di.ipv.cri.fraud.api.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import uk.gov.di.ipv.cri.common.library.domain.personidentity.PersonIdentity;
 import uk.gov.di.ipv.cri.fraud.api.domain.FraudCheckResult;
 import uk.gov.di.ipv.cri.fraud.api.domain.IdentityVerificationResult;
-import uk.gov.di.ipv.cri.fraud.api.domain.ValidationResult;
 import uk.gov.di.ipv.cri.fraud.api.gateway.ThirdPartyFraudGateway;
+import uk.gov.di.ipv.cri.fraud.api.gateway.dto.request.IdentityVerificationRequest;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class IdentityVerificationService {
@@ -38,11 +36,12 @@ public class IdentityVerificationService {
         this.identityScoreCalaculator = identityScoreCalaculator;
     }
 
-    public IdentityVerificationResult verifyIdentity(PersonIdentity personIdentity) {
+    public IdentityVerificationResult verifyIdentity(IdentityVerificationRequest personIdentity) {
         IdentityVerificationResult result = new IdentityVerificationResult();
         try {
             LOGGER.info("Validating identity...");
 
+            /*
             ValidationResult<List<String>> validationResult =
                     this.personIdentityValidator.validate(personIdentity);
 
@@ -53,6 +52,7 @@ public class IdentityVerificationService {
                 return result;
             }
             LOGGER.info("Identity info validated");
+             */
 
             FraudCheckResult fraudCheckResult = thirdPartyGateway.performFraudCheck(personIdentity);
             LOGGER.info("Third party response mapped");

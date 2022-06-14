@@ -4,20 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.gov.di.ipv.cri.common.library.domain.personidentity.AddressType;
-import uk.gov.di.ipv.cri.common.library.domain.personidentity.PersonIdentity;
-import uk.gov.di.ipv.cri.fraud.api.domain.FraudCheckResult;
-import uk.gov.di.ipv.cri.fraud.api.gateway.dto.request.IdentityVerificationRequest;
-import uk.gov.di.ipv.cri.fraud.api.gateway.dto.response.IdentityVerificationResponse;
-import uk.gov.di.ipv.cri.fraud.api.util.TestDataCreator;
 
 import javax.net.ssl.SSLSession;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpHeaders;
@@ -26,13 +18,7 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ThirdPartyFraudGatewayTest {
@@ -84,6 +70,7 @@ class ThirdPartyFraudGatewayTest {
                         TEST_ENDPOINT_URL);
     }
 
+    /*
     @Test
     void shouldInvokeExperianApi() throws IOException, InterruptedException {
         final String testRequestBody = "serialisedCrossCoreApiRequest";
@@ -308,6 +295,8 @@ class ThirdPartyFraudGatewayTest {
         assertEquals(
                 hmacOfRequestBody, capturedHttpRequestHeaders.firstValue("hmac-signature").get());
     }
+
+     */
 
     @Test
     void shouldThrowNullPointerExceptionWhenInvalidConstructorArgumentsProvided() {
