@@ -11,6 +11,10 @@ Parameters:
   ContraIndicationTableName:
     Type: AWS::SSM::Parameter::Value<String>
     Default: /dev/credentialIssuers/fraud/contraindicationMappingTableName
+  FraudAPILogsDestinationArn:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /dev/credentialIssuers/fraud/logsDestinationArn
+    Description: "Logs Destination Arn"
   Environment:
     Description: "The environment type"
     Type: "String"
@@ -169,6 +173,19 @@ Mappings:
       production: "https://review-f.account.gov.uk"
 
 Resources:
+
+  FraudAPILogsGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${AWS::StackName}-di-ipv-cri-fraud-api
+      RetentionInDays: 14
+
+  FraudAPILogsSubscriptionFilter:
+    Type: "AWS::Logs::SubscriptionFilter"
+    Properties:
+      DestinationArn: !Ref FraudAPILogsDestinationArn
+      LogGroupName: !Ref FraudAPILogsGroup
+      FilterPattern: ""
 
 ####################################################################
 #                                                                  #
